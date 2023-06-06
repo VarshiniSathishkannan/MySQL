@@ -1,0 +1,43 @@
+Windows Subsystem for Linux update
+wsl --update 
+
+Pull the dicker image (Default tag is latest)
+docker pull mysql/mysql-server
+
+Run/start a container
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -d mysql/mysql-server:latest
+
+docker ps
+Status will go from starting to healthy
+
+docker logs mysql
+Shows the logs
+
+docker exec -it mysql mysql -u root -p
+Use the docker exec -it command to start a mysql client inside the Docker container
+
+mysql command line opens
+
+
+LOAD DATA LOCAL INFILE 'C:\Users\varsh\OneDrive\Documents\employees.csv' INTO TABLE employees FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+
+show global variables like 'local_infile';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| local_infile  | OFF   |
++---------------+-------+
+
+set global local_infile=1;
+
+show global variables like 'local_infile';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| local_infile  | ON    |
++---------------+-------+
+
+"C:\Users\varsh\employees.csv"
+
+https://www.w3schools.com/mysql/mysql_ref_functions.asp
+
