@@ -13,3 +13,5 @@ select * from names_with_m;
 |  5 | Magesh |
 +----+--------+
 
+select tweet_id from Tweets where length(content) > 15;
+
