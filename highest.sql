@@ -13,6 +13,7 @@ select * from orders order by amount desc;
 |           3 | C             | 2018-10-15 |    100 |
 +-------------+---------------+------------+--------+
 
+-- Highest
 select max(amount) from orders;
 +-------------+
 | max(amount) |
@@ -20,6 +21,7 @@ select max(amount) from orders;
 |         300 |
 +-------------+
 
+--Second highest
  select max(amount) from orders where amount < (select max(amount) from orders);
 +-------------+
 | max(amount) |
@@ -27,7 +29,7 @@ select max(amount) from orders;
 |         250 |
 +-------------+
 
-
+-- Second highest using offset -- but we may have many records with same value
 select * from orders order by amount desc limit 2,1;
 +-------------+---------------+------------+--------+
 | customer_id | customer_name | date       | amount |
@@ -41,6 +43,10 @@ select * from orders order by amount desc limit 3,1;
 +-------------+---------------+------------+--------+
 |           1 | A             | 2020-10-15 |    150 |
 +-------------+---------------+------------+--------+
+
+-- This is the right approach
+
+-- Better approach is by using rank function
 
 select * from orders where amount = (select amount from orders order by amount desc limit 3,1);
 +-------------+---------------+------------+--------+
