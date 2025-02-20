@@ -1,13 +1,21 @@
 -- Write an SQL query to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+create table weather
+(
+    id int primary key auto_increment,
+    date date,
+    temperature int
+);
 
-Weather table:
+insert into weather(date,temperature) values ('2015-01-01',10),('2015-01-02',25),('2015-01-03',20),('2015-01-04',30);
+
+select * from weather;
 +----+------------+-------------+
-| id | recordDate | temperature |
+| id | date       | temperature |
 +----+------------+-------------+
-| 1  | 2015-01-01 | 10          |
-| 2  | 2015-01-02 | 25          |
-| 3  | 2015-01-03 | 20          |
-| 4  | 2015-01-04 | 30          |
+|  1 | 2015-01-01 |          10 |
+|  2 | 2015-01-02 |          25 |
+|  3 | 2015-01-03 |          20 |
+|  4 | 2015-01-04 |          30 |
 +----+------------+-------------+
 Output: 
 +----+
