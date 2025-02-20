@@ -1,3 +1,11 @@
+select * from Artist a; 
+
+select Name, case when ArtistId%2 is 0 then lag(Name) over (order by ArtistId) else 
+COALESCE(lead(Name) over (order by ArtistId),Name) 
+end as New_Name from Artist a 
+
+lead(student_name,1,student_name) 3rd option is default value if no lead value is present
+
 select * from athlete_events ae ;
 
 1. How many olympics games have been held?
