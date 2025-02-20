@@ -15,3 +15,12 @@ select * from names_with_m;
 
 select tweet_id from Tweets where length(content) > 15;
 
+explain select * from agents;
+explain analyze select * from agents;
+create index on agents using btree(location);
+create index on agents using hash(amount);
+
+set enable_nestloop=false
+set enable_hashjoin=false
+set enable_mergejoin=true
+
