@@ -30,6 +30,8 @@ select * from login_details;
 
 --Solution:
 
+--lead will give the next row records 
+
 select distinct repeated_names
 from (
 select *,
@@ -38,3 +40,10 @@ and  user_name = lead(user_name,2) over(order by login_id)
 then user_name else null end as repeated_names
 from login_details) x
 where x.repeated_names is not null;
+
++----------------+
+| repeated_names |
++----------------+
+| Stewart        |
+| James          |
++----------------+
