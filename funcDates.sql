@@ -102,3 +102,19 @@ select DAYNAME(CURDATE());
 +--------------------+
 | Monday             |
 +--------------------+
+
+%D	Day of the month as a numeric value, followed by suffix (1st, 2nd, 3rd, ...)
+%d	Day of the month as a numeric value (01 to 31)
+%H	Hour (00 to 23)
+%h	Hour (00 to 12)
+%i	Minutes (00 to 59)
+%M	Month name in full (January to December)
+%m	Month name as a numeric value (00 to 12)
+%p	AM or PM
+%r	Time in 12 hour AM or PM format (hh:mm:ss AM/PM)
+%S	Seconds (00 to 59)
+%s	Seconds (00 to 59)
+%T	Time in 24 hour format (hh:mm:ss)
+%w	Day of the week where Sunday=0 and Saturday=6
+%Y	Year as a numeric, 4-digit value
+%y	Year as a numeric, 2-digit value

@@ -56,3 +56,23 @@ SELECT REPLACE('HI','I','ELLO');
 | HELLO                    |
 +--------------------------+
 
+SELECT CONCAT_WS("-", "SQL", "Tutorial", "is", "fun!") AS ConcatenatedString;
++----------------------+
+| ConcatenatedString   |
++----------------------+
+| SQL-Tutorial-is-fun! |
++----------------------+
+
+SELECT LCASE("SQL Tutorial is FUN!");
++-------------------------------+
+| LCASE("SQL Tutorial is FUN!") |
++-------------------------------+
+| sql tutorial is fun!          |
++-------------------------------+
+
+SELECT LOWER("HELLO");
++----------------+
+| LOWER("HELLO") |
++----------------+
+| hello          |
++----------------+
