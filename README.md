@@ -1,8 +1,4 @@
-https://datalemur.com/questions
 
-https://tableconvert.com/csv-to-sql
-
-https://www.geeksforgeeks.org/sql-rows-between/
 
 
 

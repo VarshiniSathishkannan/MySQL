@@ -25,4 +25,4 @@ Output:
 | 4  |
 +----+
 
-select b.id from Weather a join Weather b on a.recordDate = date_sub(b.recordDate, interval 1 day) where b.temperature > a.temperature;
+select b.id from weather a join weather b on a.date = date_sub(b.date, interval 1 day) where b.temperature > a.temperature;

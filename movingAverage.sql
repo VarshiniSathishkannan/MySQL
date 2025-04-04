@@ -1,3 +1,6 @@
+https://learnsql.com/blog/sql-window-functions-rows-clause/
+
+
 CREATE TABLE moveAvg (
     transaction_date VARCHAR(512),
     product_id VARCHAR(512),

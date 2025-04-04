@@ -27,3 +27,10 @@ select IFNULL(null,'default'); -- similar to coalesce but we can pass only 2 val
 +------------------------+
 | default                |
 +------------------------+
+
+select group_concat(user_name) from users; -- combines all values from a column in a single line
++----------------------------------+
+| group_concat(user_name)          |
++----------------------------------+
+| Sumit,Reshma,Farhana,Robin,Robin |
++----------------------------------+

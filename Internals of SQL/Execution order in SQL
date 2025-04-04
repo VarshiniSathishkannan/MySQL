@@ -1,0 +1,81 @@
+
+--SQL--
+select city, count(*) as total from orders join customers on orders.customer_id = customers.customer_id where order_status != 'PENDING_PAYMENT' group by city having count(*) > 10 order by total desc
+
+Explain plan:
+
+1.
+clustered index scan on orders.customer_id and order_status != 'PENDING_PAYMENT' (Filter is done before joining, predicate pushdown) - returns orders.customer_id
+
+2.
+clustered index scan on customers.customer_id - returns customers.customer_id, customers.city
+
+3.
+Hash Match (Inner join)
+orders.customer_id = customers.customer_id - returns customers.city
+
+4. 
+Hash Match (Aggragate)
+count(*) - returns customers.city, count(*)
+
+5.
+Filter
+having count(*) > 10 - returns customers.city, count(*)
+
+6. 
+Sort
+order by total desc - returns customers.city, count(*)
+
+:::Order:::
+
+From, join
+
+where (predicate pushdown)
+
+group by
+
+having
+
+select (Any functions in select, aliases)
+
+order by 
+
+limit
+
+--SQL--
+select city, count(*) as total from orders join customers on orders.customer_id = customers.customer_id where order_status != 'PENDING_PAYMENT' group by city having total > 10 order by total desc
+
+In having clause instead of count(*) if i give alias name total, it throws error, because aliases are done post the group by and having but we can give it in order by clause
+
+--SQL--
+
+select city, count(*) as total from orders join customers on orders.customer_id = customers.customer_id where order_status != 'PENDING_PAYMENT' group by city having city = 'phoenixs' order by total desc
+
+In the above case, having city = 'phoenixs' will be predicate pushdown so while doin scan itself it fetches only for that city. 
+
+SQL is smart :)
+
+--SQL--
+select top 3 city, count(*) as total from orders join customers on orders.customer_id = customers.customer_id where order_status != 'PENDING_PAYMENT' group by city order by total desc
+
+Sort (Top N Sort)
+Here Sorting happened only for 3 records, it just found the top 3 and returned.
+
+Again SQL is smart :)
+
+--SQL--
+select top 3 city, count(*) as total from orders join customers on orders.customer_id = customers.customer_id where order_status != 'PENDING_PAYMENT' group by city having count(*) > 10 order by total desc
+
+count(*) > 100
+Filter first
+Sort next
+
+Explanation:
+count(*) > 100 might eliminate most of the records so filter is coming first 
+
+count(*) > 10
+Sort first 
+Filter next
+
+Explanation:
+count(*) > 10 gives many records so sorting first and then filter will become easy to do 

@@ -10,7 +10,7 @@ insert into weather2 values (1, 'London', -1, '2021-01-01'),(2, 'London', -2, '2
 
 select * from weather2;
 
-fetch all the records when London had extremely cold temperature for 3 consecutive days
+-- fetch all the records when London had extremely cold temperature for 3 consecutive days
 
 select * from weather w ;
 

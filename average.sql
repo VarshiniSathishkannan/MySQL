@@ -8,14 +8,23 @@ create database customer;
 
 use customer;
 
-create table orders (
-    -> customer_id int,
-    -> customer_name varchar(255),
-    -> date date,
-    -> amount int )
-    -> ;
+DROP TABLE IF EXISTS orders;
 
-insert into orders values (1,'A','2020-10-10',100); ...
+create table orders (
+     customer_id int,
+     customer_name varchar(255),
+     date date,
+     amount int );
+
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('1', 'A', '2020-10-10', '100');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('1', 'A', '2020-10-15', '150');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('1', 'A', '2021-10-15', '150');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('2', 'B', '2019-10-15', '100');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('2', 'B', '2020-10-15', '150');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('2', 'B', '2021-10-15', '200');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('3', 'C', '2018-10-15', '100');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('3', 'C', '2019-10-15', '250');
+INSERT INTO orders (customer_id, customer_name, date, amount) VALUES ('3', 'C', '2021-10-15', '300');
 
 select * from orders;
 +-------------+---------------+------------+--------+
