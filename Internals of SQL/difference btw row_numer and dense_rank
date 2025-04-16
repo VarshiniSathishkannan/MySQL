@@ -1,0 +1,39 @@
+ROW_NUMBER()
+Always assigns a unique, sequential number to each row.
+
+Even if there are duplicates, each row gets a different number.
+
+No gaps unless filtering with a WHERE.
+
+Example:
+
+
+SELECT name, score,
+       ROW_NUMBER() OVER (ORDER BY score DESC) AS row_num
+FROM students;
+
+name	score	row_num
+Alice	95	1
+Bob	95	2
+Carol	90	3
+🔹 Even though Alice and Bob have the same score, they get different row numbers.
+
+📌 DENSE_RANK()
+Assigns the same rank to ties.
+
+The next rank continues without gaps.
+
+Example:
+
+
+SELECT name, score,
+       DENSE_RANK() OVER (ORDER BY score DESC) AS rank
+FROM students;
+
+name	score	rank
+Alice	95	1
+Bob	95	1
+Carol	90	2
+
+🔹 Alice and Bob have the same score → both get rank 1.
+🔹 Carol is next, so she gets rank 2 (not 3 — dense, no gaps).

@@ -1,0 +1,68 @@
+ROWS BETWEEN
+1. UNBOUNDED PRECEDING
+Refers to the first row of the partition.
+
+Useful for cumulative sums or running totals.
+
+2. CURRENT ROW
+Refers to the current row being processed.
+
+3. N PRECEDING / N FOLLOWING
+Refers to a fixed number of rows before or after the current one.
+
+4. UNBOUNDED FOLLOWING
+Refers to the last row in the partition.
+
+🧾 Common Frame Specs:
+
+1. Cumulative Total
+sql
+Copy
+Edit
+SUM(sales) OVER (
+  ORDER BY date
+  ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+)
+Includes: All rows from the start up to the current row.
+
+2. Moving Average (Window of 2 previous + current row)
+sql
+Copy
+Edit
+AVG(score) OVER (
+  ORDER BY exam_date
+  ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+)
+Includes: The current row and 2 before it — sliding window.
+
+3. Center-Aligned Window (1 before, current, 1 after)
+sql
+Copy
+Edit
+AVG(score) OVER (
+  ORDER BY exam_date
+  ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+)
+Includes: Previous, current, and next row.
+
+ 4. Entire Partition
+sql
+Copy
+Edit
+SUM(sales) OVER (
+  PARTITION BY region
+  ORDER BY date
+  ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+)
+Includes: All rows in the partition — full window.
+
+5. Look-Ahead Calculation
+sql
+Copy
+Edit
+SUM(sales) OVER (
+  ORDER BY date
+  ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING
+)
+Includes: Current row + next 2 rows — good for forecasting.
+

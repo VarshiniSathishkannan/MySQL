@@ -118,3 +118,49 @@ select DAYNAME(CURDATE());
 %w	Day of the week where Sunday=0 and Saturday=6
 %Y	Year as a numeric, 4-digit value
 %y	Year as a numeric, 2-digit value
+
+What happens when you subtract two DATETIME columns in MySQL?
+
+
+SELECT datetime_column1 - datetime_column2 AS result
+FROM your_table;
+
+-- 👇 Here's the twist:
+-- MySQL treats this as a numeric subtraction (not a true time interval).
+
+-- It converts each DATETIME to a numeric value in the format:
+-- YYYYMMDDHHMMSS
+
+-- Then it just subtracts those numbers.
+
+🔍 Example:
+
+
+SELECT '2023-09-25 14:30:00' - '2023-09-25 12:00:00' AS result;
+
+-- 🧮 Internally becomes:
+
+-- 
+-- 20230925143000 - 20230925120000 = 230000
+-- ✅ Output: 230000
+-- 🧠 Which looks like 2 hours, 30 minutes, but it's really just math — not an actual time interval.
+
+✅ Correct Way to Get Time Difference
+
+1. Use TIMEDIFF() for TIME or DATETIME difference:
+
+SELECT TIMEDIFF('2023-09-25 14:30:00', '2023-09-25 12:00:00') AS diff;
+➡️ Output: '02:30:00' (as a TIME value)
+
+2. Use TIMESTAMPDIFF() to get difference in units (like minutes, hours, days):
+
+SELECT TIMESTAMPDIFF(MINUTE, start_time, end_time) AS minutes_diff
+FROM your_table;
+
+✅ Returns: number of minutes (integer)
+
+Can You Pass Only Dates to TIMEDIFF() and TIMESTAMPDIFF()?
+
+Function	    Accepts Only DATE?    Notes
+TIMEDIFF()	    ❌ No	            Expects DATETIME or TIME, not just DATE
+TIMESTAMPDIFF()	✅ Yes	            Works perfectly with DATE, DATETIME, or TIMESTAMP

@@ -1,4 +1,34 @@
- select * from hires;
+CREATE TABLE hires (
+    id INT PRIMARY KEY,
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
+    gender ENUM('Male', 'Female'),
+    salary DECIMAL(10,2),
+    hiredate DATE
+);
+
+INSERT INTO hires (id, firstname, lastname, gender, salary, hiredate) VALUES
+(1, 'Philip', 'Hastings', 'Male', 45000.00, '2014-11-03'),
+(2, 'Mary', 'Lambeth', 'Female', 30000.00, '2014-10-03'),
+(3, 'Valarie', 'Vikings', 'Female', 35000.00, '2014-09-02'),
+(4, 'Jd', 'Nosin', 'Male', 6000.00, '2013-10-01'),
+(5, 'Philip', 'Hastings', 'Male', 45000.00, '2014-11-03'),
+(6, 'Mary', 'Lambeth', 'Female', 30000.00, '2014-10-03'),
+(7, 'Valarie', 'Vikings', 'Female', 35000.00, '2014-02-09'),
+(8, 'John', 'Stanmore', 'Male', 80000.00, '2014-02-22'),
+(9, 'Able', 'Edward', 'Male', 5000.00, '2014-01-22'),
+(10, 'Emma', 'Nan', 'Female', 5000.00, '2014-01-14'),
+(11, 'Jd', 'Nosin', 'Male', 6000.00, '2013-01-10'),
+(12, 'San', 'Hughes', 'Male', 7000.00, '2013-03-15'),
+(13, 'Nico', 'Night', 'Male', 6500.00, '2013-04-19'),
+(14, 'Martin', 'Jany', 'Male', 5500.00, '2013-05-23'),
+(15, 'Mathew', 'Mann', 'Male', 4500.00, '2013-06-23'),
+(16, 'Baker', 'Barn', 'Male', 3500.00, '2013-07-23'),
+(17, 'Mosin', 'Barn', 'Male', 8500.00, '2013-08-21'),
+(18, 'Rachel', 'Aril', 'Female', 6500.00, '2013-09-14');
+
+
+select * from hires;
 +----+-----------+----------+--------+--------+------------+
 | id | firstname | lastname | gender | salary | hiredate   |
 +----+-----------+----------+--------+--------+------------+
@@ -24,7 +54,7 @@
 
 Find the recent hires from last 6 month
 
-select *, datediff(current_date(),hiredate) from hires ; /* datediff gives no of days difference */
+select *, TIMESTAMPDIFF(MONTH,hiredate,current_date()) from hires;
 +----+-----------+----------+--------+--------+------------+-----------------------------------+
 | id | firstname | lastname | gender | salary | hiredate   | datediff(current_date(),hiredate) |
 +----+-----------+----------+--------+--------+------------+-----------------------------------+

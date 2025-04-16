@@ -1,0 +1,48 @@
+Important Behavior (especially for LAST_VALUE()):
+By default:
+
+ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+So LAST_VALUE() will often just return the current row’s value, unless you explicitly define the frame to include future rows.
+
+Example:
+
+
+id	customer	amount	order_date
+1	A	100	2024-01-01
+2	A	200	2024-01-02
+3	A	150	2024-01-03
+
+SELECT 
+  id,
+  customer,
+  amount,
+  FIRST_VALUE(amount) OVER (PARTITION BY customer ORDER BY order_date) AS first_amount
+FROM sales;
+
+
+id	customer	amount	first_amount
+1	A	100	100
+2	A	200	100
+3	A	150	100
+
+SELECT 
+  id,
+  customer,
+  amount,
+  LAST_VALUE(amount) OVER (PARTITION BY customer ORDER BY order_date) AS last_amount
+FROM sales;
+
+
+id	customer	amount	last_amount
+1	A	100	100 ← just current row! 😬
+2	A	200	200
+3	A	150	150
+
+✅ Proper LAST_VALUE() — include future rows!
+You must extend the window like this:
+
+LAST_VALUE(amount) OVER (
+  PARTITION BY customer
+  ORDER BY order_date
+  ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+) AS last_amount

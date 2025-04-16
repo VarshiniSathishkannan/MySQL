@@ -1,0 +1,41 @@
+What is RANGE BETWEEN?
+RANGE BETWEEN defines a window frame based on the values of the ORDER BY column, not row positions like ROWS BETWEEN.
+
+So instead of saying “2 rows before and after,” you're saying “values within a certain range.”
+
+Key Concept:
+It works on the values of the ORDER BY column.
+
+Best used with numeric or date/time columns.
+
+May not behave as expected with non-unique ORDER BY values.
+
+Is RANGE BETWEEN supported in MySQL?
+✅ Yes — but only in a very basic form.
+
+🔒 What is supported:
+RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+
+RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING
+
+
+SELECT 
+  sales_date,
+  sales,
+  SUM(sales) OVER (
+    ORDER BY sales_date
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS running_total
+FROM sales_data;
+This gives you a running total based on sales_date, and it works because it's just UNBOUNDED PRECEDING to CURRENT ROW.
+
+SELECT 
+  region,
+  sales_date,
+  amount,
+  SUM(amount) OVER (
+    PARTITION BY region
+    ORDER BY sales_date
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS running_total
+FROM sales_data;

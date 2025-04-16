@@ -1,0 +1,61 @@
+Tb1 Tb2 
+1   1   
+1   1   
+1   2   
+2   2
+3   4
+3   null
+3
+
+Inner join:
+
+Each record from left table will try to join with every record in right table, whenever there is a match, it returns
+
+Result:
+1,1
+1,1
+1,1
+1,1
+1,1
+1,1
+2,2
+2,2
+
+Total - 8 records
+
+Left Join:
+
+Inner join and all the other records from left table
+
+Result:
+
+above 8 records +
+3,null
+3,null
+3,null
+
+Right join:
+
+Inner join and all the other records from right table
+
+Above 8 records + 
+null,4
+null,null
+
+Full join:
+
+Inner join + all the other records from left and right
+
+Above 8 + 3 (left) + 2 (right)
+
+Cross join:
+
+For every record in left table, it matches with every record in right table irrespective of the value, no join condition
+
+count(Tb1) * count(Tb2)
+
+Natural Join:
+
+It is similar to cross join if there is no matching column, if there is a matching/same column name, then it behaves like a inner join 
+
+no join condition here as well

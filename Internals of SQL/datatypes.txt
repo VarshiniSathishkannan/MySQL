@@ -1,0 +1,71 @@
+MySQL supports a variety of data types that you can use when creating tables. These data types fall into three main categories: Numeric, Date and Time, and String (Character and Byte) types.
+
+🔢 Numeric Data Types
+
+Type	Description
+TINYINT	1 byte, range: -128 to 127 or 0 to 255
+SMALLINT	2 bytes, range: -32,768 to 32,767
+MEDIUMINT	3 bytes, range: -8M to 8M
+INT / INTEGER	4 bytes, range: -2B to 2B
+BIGINT	8 bytes, large range
+DECIMAL(M,D)	Fixed-point, exact precision
+NUMERIC(M,D)	Synonym for DECIMAL
+FLOAT(M,D)	Approximate, single-precision
+DOUBLE(M,D)	Approximate, double-precision
+BIT(M)	Stores bit field values
+BOOLEAN	Synonym for TINYINT(1)
+
+⏰ Date and Time Data Types
+
+Type	Description
+DATE	'YYYY-MM-DD'
+DATETIME	'YYYY-MM-DD HH:MM:SS'
+TIMESTAMP	Same as DATETIME, but stored as UTC
+TIME	'HH:MM:SS'
+YEAR	Year in 4-digit format (e.g., 2025)
+
+🔤 String (Character and Byte) Data Types
+
+Type	Description
+CHAR(M)	Fixed-length string (0 to 255)
+VARCHAR(M)	Variable-length string (max 65,535 bytes total)
+TINYTEXT	Max 255 bytes
+TEXT	Max 65,535 bytes
+MEDIUMTEXT	Max 16 MB
+LONGTEXT	Max 4 GB
+BINARY(M)	Fixed-length binary
+VARBINARY(M)	Variable-length binary
+TINYBLOB	Max 255 bytes
+BLOB	Max 65,535 bytes
+MEDIUMBLOB	Max 16 MB
+LONGBLOB	Max 4 GB
+ENUM('a','b')	One value from predefined list
+SET('a','b')	Multiple values from predefined list
+
+Great question!
+
+In DECIMAL(M, D), the M and D have specific meanings related to precision and scale:
+
+M (Precision): The maximum number of total digits (both before and after the decimal point).
+
+D (Scale): The number of digits after the decimal point.
+
+💡 Example:
+
+DECIMAL(6, 2)
+M = 6: Total of 6 digits.
+
+D = 2: 2 digits after the decimal point.
+
+So the number can range from:
+
+
+-9999.99 to 9999.99
+(because 4 digits before the decimal and 2 after = 6 digits total)
+
+⚠️ A Few Notes:
+If you omit both M and D, MySQL uses the default: DECIMAL(10, 0)
+
+D must be ≤ M.
+
+Unlike FLOAT or DOUBLE, DECIMAL is exact and is usually used for financial or monetary data.
